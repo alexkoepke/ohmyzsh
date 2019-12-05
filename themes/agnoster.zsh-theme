@@ -216,6 +216,15 @@ prompt_virtualenv() {
   fi
 }
 
+# Add terraform workspace in prompt when needed 
+prompt_terraform() {
+	if [[ -d .terraform ]]; then
+	  local workspace=`terraform workspace show 2> /dev/null`
+	  prompt_segment cyan black 
+    	  echo -n "[$workspace]"
+	fi
+}
+
 # Status:
 # - was there an error
 # - am I root
@@ -254,6 +263,7 @@ build_prompt() {
   prompt_git
   prompt_bzr
   prompt_hg
+  prompt_terraform
   prompt_end
 }
 
