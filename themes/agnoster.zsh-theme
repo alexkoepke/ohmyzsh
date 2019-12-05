@@ -205,7 +205,24 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue $CURRENT_FG '%c'
+  if git rev-parse --show-toplevel &> /dev/null ; then
+      stringZ="$(pwd)"
+      X="$(git rev-parse --show-toplevel)"
+      IFS='/' read -rA array <<< "$X"
+
+      dpw="${array[-1]}${stringZ#$X}"
+      length=${#dpw}
+
+      if (( $length == 0 )); then
+        dpw=${array[-1]}
+        # dpw='%c'
+      fi
+  else
+      dpw="$(pwd)"
+  fi
+
+  # prompt_segment blue $CURRENT_FG '%c'
+  prompt_segment blue $CURRENT_FG $dpw
 }
 
 # Virtualenv: current working virtualenv
