@@ -205,7 +205,6 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-<<<<<<< HEAD
   if git rev-parse --show-toplevel &> /dev/null ; then
       stringZ="$(pwd)"
       X="$(git rev-parse --show-toplevel)"
@@ -224,9 +223,6 @@ prompt_dir() {
 
   # prompt_segment blue $CURRENT_FG '%c'
   prompt_segment blue $CURRENT_FG $dpw
-=======
-  prompt_segment 39d $CURRENT_FG '%c'
->>>>>>> customize agnoster
 }
 
 # Virtualenv: current working virtualenv
